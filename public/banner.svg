@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f4c2a"/>
+      <stop offset="60%" style="stop-color:#1a6b3a"/>
+      <stop offset="100%" style="stop-color:#0d3d22"/>
+    </linearGradient>
+    <!-- Gold accent gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5c842"/>
+      <stop offset="100%" style="stop-color:#e8a000"/>
+    </linearGradient>
+    <!-- Card gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#16a34a"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Soft shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    <filter id="shadow-sm">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+    <clipPath id="roundRect">
+      <rect x="680" y="100" width="460" height="430" rx="32"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Decorative circles (background texture) -->
+  <circle cx="980" cy="-80" r="320" fill="#ffffff" fill-opacity="0.03"/>
+  <circle cx="1150" cy="550" r="260" fill="#f5c842" fill-opacity="0.04"/>
+  <circle cx="-60" cy="400" r="280" fill="#16a34a" fill-opacity="0.08"/>
+
+  <!-- Islamic geometric pattern dots (subtle) -->
+  <g fill="#ffffff" fill-opacity="0.06">
+    <circle cx="80" cy="50" r="3"/>
+    <circle cx="140" cy="50" r="3"/>
+    <circle cx="200" cy="50" r="3"/>
+    <circle cx="110" cy="90" r="3"/>
+    <circle cx="170" cy="90" r="3"/>
+    <circle cx="80" cy="130" r="3"/>
+    <circle cx="140" cy="130" r="3"/>
+    <circle cx="200" cy="130" r="3"/>
+    <circle cx="1050" cy="520" r="3"/>
+    <circle cx="1110" cy="520" r="3"/>
+    <circle cx="1080" cy="555" r="3"/>
+    <circle cx="1020" cy="555" r="3"/>
+    <circle cx="1140" cy="555" r="3"/>
+  </g>
+
+  <!-- ── LEFT SIDE: Branding ── -->
+
+  <!-- Crescent moon icon -->
+  <g transform="translate(80, 80)">
+    <circle cx="52" cy="52" r="52" fill="url(#goldGrad)" filter="url(#glow)" fill-opacity="0.9"/>
+    <!-- Moon cutout -->
+    <circle cx="72" cy="38" r="42" fill="#0f4c2a"/>
+    <!-- Star 1 -->
+    <polygon points="110,28 113,38 124,38 115,44 118,55 110,49 101,55 104,44 95,38 107,38" fill="#f5c842" opacity="0.9" transform="scale(0.55) translate(100, 30)"/>
+  </g>
+
+  <!-- App name -->
+  <text x="80" y="210" font-family="'Segoe UI', Arial, sans-serif" font-size="62" font-weight="900" fill="#ffffff" filter="url(#shadow-sm)">Kumpul</text>
+  <text x="80" y="278" font-family="'Segoe UI', Arial, sans-serif" font-size="62" font-weight="900" fill="url(#goldGrad)">Duit Raya</text>
+
+  <!-- Tagline -->
+  <text x="80" y="328" font-family="'Segoe UI', Arial, sans-serif" font-size="22" fill="#86efac" letter-spacing="0.5">Track your family's Raya collection 💰</text>
+
+  <!-- Divider line -->
+  <rect x="80" y="355" width="60" height="4" rx="2" fill="url(#goldGrad)"/>
+
+  <!-- Setup steps -->
+  <g font-family="'Segoe UI', Arial, sans-serif">
+    <!-- Step 1 -->
+    <circle cx="104" cy="398" r="16" fill="#16a34a"/>
+    <text x="104" y="403" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">1</text>
+    <text x="130" y="395" font-size="16" font-weight="700" fill="#ffffff">Settings → Events</text>
+    <text x="130" y="413" font-size="13" fill="#86efac">Create &amp; activate your Raya event</text>
+
+    <!-- Step 2 -->
+    <circle cx="104" cy="458" r="16" fill="#16a34a"/>
+    <text x="104" y="463" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">2</text>
+    <text x="130" y="455" font-size="16" font-weight="700" fill="#ffffff">Settings → Members</text>
+    <text x="130" y="473" font-size="13" fill="#86efac">Add all your family members</text>
+
+    <!-- Step 3 -->
+    <circle cx="104" cy="518" r="16" fill="url(#goldGrad)"/>
+    <text x="104" y="523" text-anchor="middle" font-size="13" font-weight="700" fill="#0f4c2a">3</text>
+    <text x="130" y="515" font-size="16" font-weight="700" fill="#ffffff">🏆 Leaderboard</text>
+    <text x="130" y="533" font-size="13" fill="#86efac">See live rankings instantly!</text>
+  </g>
+
+  <!-- URL pill -->
+  <rect x="80" y="570" width="430" height="42" rx="21" fill="#ffffff" fill-opacity="0.1"/>
+  <rect x="80" y="570" width="430" height="42" rx="21" stroke="url(#goldGrad)" stroke-width="1.5" fill="none"/>
+  <text x="295" y="596" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="600" fill="#f5c842">kumpul-duit-raya.naimsolong.com</text>
+
+  <!-- ── RIGHT SIDE: Phone Mockup ── -->
+  <!-- Phone outer shell -->
+  <rect x="688" y="72" width="424" height="492" rx="44" fill="#1e293b" filter="url(#shadow)"/>
+  <!-- Phone screen -->
+  <rect x="700" y="84" width="400" height="468" rx="36" fill="#f0fdf4"/>
+  <!-- Notch -->
+  <rect x="830" y="84" width="140" height="28" rx="0" fill="#1e293b"/>
+  <rect x="840" y="84" width="120" height="24" rx="12" fill="#1e293b"/>
+
+  <!-- Screen content: App UI -->
+  <!-- Status area -->
+  <rect x="700" y="84" width="400" height="68" rx="36" fill="#16a34a"/>
+  <rect x="700" y="118" width="400" height="34" fill="#16a34a"/>
+
+  <!-- Event banner on screen -->
+  <rect x="718" y="158" width="364" height="100" rx="18" fill="none"/>
+  <defs>
+    <linearGradient id="eventBanner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#16a34a"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect x="718" y="158" width="364" height="100" rx="18" fill="url(#eventBanner)"/>
+  <text x="740" y="192" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#bbf7d0" font-weight="600" letter-spacing="1.5">ACTIVE EVENT</text>
+  <text x="740" y="215" font-family="'Segoe UI', Arial, sans-serif" font-size="20" fill="#ffffff" font-weight="900">🌙 Raya 2026</text>
+  <text x="740" y="235" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#bbf7d0">Total Collected</text>
+  <text x="740" y="252" font-family="'Segoe UI', Arial, sans-serif" font-size="22" fill="#ffffff" font-weight="900">RM 1,240.00</text>
+  <rect x="1010" y="234" width="52" height="28" rx="10" fill="#ffffff" fill-opacity="0.2"/>
+  <text x="1036" y="252" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#ffffff" font-weight="700">🏆 Top</text>
+
+  <!-- Section label -->
+  <text x="740" y="285" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#374151" font-weight="800">All Members</text>
+
+  <!-- Member cards row 1 -->
+  <rect x="718" y="294" width="170" height="86" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="760" cy="322" r="18" fill="#16a34a"/>
+  <text x="760" y="328" text-anchor="middle" font-size="16" fill="#ffffff">👦</text>
+  <text x="803" y="319" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#1f2937" font-weight="700">Ahmad</text>
+  <text x="803" y="334" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#16a34a" font-weight="900">RM 350</text>
+  <rect x="726" y="367" width="155" height="6" rx="3" fill="#e5e7eb"/>
+  <rect x="726" y="367" width="110" height="6" rx="3" fill="#16a34a"/>
+
+  <rect x="912" y="294" width="170" height="86" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="954" cy="322" r="18" fill="#0284c7"/>
+  <text x="954" y="328" text-anchor="middle" font-size="16" fill="#ffffff">👧</text>
+  <text x="997" y="319" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#1f2937" font-weight="700">Sofea</text>
+  <text x="997" y="334" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#0284c7" font-weight="900">RM 290</text>
+  <rect x="920" y="367" width="155" height="6" rx="3" fill="#e5e7eb"/>
+  <rect x="920" y="367" width="90" height="6" rx="3" fill="#0284c7"/>
+
+  <!-- Member cards row 2 -->
+  <rect x="718" y="392" width="170" height="86" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="760" cy="420" r="18" fill="#dc2626"/>
+  <text x="760" y="426" text-anchor="middle" font-size="16" fill="#ffffff">🧒</text>
+  <text x="803" y="417" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#1f2937" font-weight="700">Imran</text>
+  <text x="803" y="432" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#dc2626" font-weight="900">RM 210</text>
+  <rect x="726" y="465" width="155" height="6" rx="3" fill="#e5e7eb"/>
+  <rect x="726" y="465" width="70" height="6" rx="3" fill="#dc2626"/>
+
+  <rect x="912" y="392" width="170" height="86" rx="16" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+  <circle cx="954" cy="420" r="18" fill="#7c3aed"/>
+  <text x="954" y="426" text-anchor="middle" font-size="16" fill="#ffffff">👧</text>
+  <text x="997" y="417" font-family="'Segoe UI', Arial, sans-serif" font-size="11" fill="#1f2937" font-weight="700">Hana</text>
+  <text x="997" y="432" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#7c3aed" font-weight="900">RM 390</text>
+  <rect x="920" y="465" width="155" height="6" rx="3" fill="#e5e7eb"/>
+  <rect x="920" y="465" width="130" height="6" rx="3" fill="#7c3aed"/>
+
+  <!-- Bottom nav bar on phone -->
+  <rect x="700" y="498" width="400" height="54" fill="#ffffff" stroke="#f3f4f6" stroke-width="1"/>
+  <rect x="700" y="536" width="400" height="16" rx="0" fill="#ffffff"/>
+  <!-- Bottom nav icons -->
+  <text x="762" y="526" text-anchor="middle" font-size="20" fill="#16a34a">🏠</text>
+  <text x="862" y="526" text-anchor="middle" font-size="20" fill="#9ca3af">🏆</text>
+  <text x="962" y="526" text-anchor="middle" font-size="20" fill="#9ca3af">💳</text>
+  <text x="1062" y="526" text-anchor="middle" font-size="20" fill="#9ca3af">⚙️</text>
+
+  <!-- Phone home indicator -->
+  <rect x="830" y="546" width="140" height="4" rx="2" fill="#d1d5db"/>
+
+  <!-- "Free & Offline" badge -->
+  <rect x="1010" y="56" width="104" height="32" rx="16" fill="url(#goldGrad)" filter="url(#shadow-sm)"/>
+  <text x="1062" y="76" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="800" fill="#0f4c2a">Free &amp; Offline</text>
+</svg>
