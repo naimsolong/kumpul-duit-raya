@@ -25,12 +25,26 @@
       </div>
     </div>
 
-    <!-- No event -->
+    <!-- No events at all: onboarding wizard or plain fallback after skip -->
+    <template v-else-if="noEvents">
+      <OnboardingFlow v-if="!onboardingDismissed" @dismiss="onboardingDismissed = true" />
+      <div v-else class="rounded-2xl border-2 border-dashed border-gray-200 p-8 text-center space-y-3">
+        <div class="text-5xl">🌙</div>
+        <p class="font-bold text-gray-600">{{ $t('home.noEvent') }}</p>
+        <p class="text-sm text-gray-400">{{ $t('home.createEventPrompt') }}</p>
+        <NuxtLink to="/admin/events/new"
+          class="inline-block mt-2 px-5 py-2.5 rounded-xl font-bold text-white text-sm"
+          style="background: var(--color-primary)"
+        >{{ $t('home.goToAdmin') }}</NuxtLink>
+      </div>
+    </template>
+
+    <!-- Events exist but none active -->
     <div v-else class="rounded-2xl border-2 border-dashed border-gray-200 p-8 text-center space-y-3">
       <div class="text-5xl">🌙</div>
       <p class="font-bold text-gray-600">{{ $t('home.noEvent') }}</p>
       <p class="text-sm text-gray-400">{{ $t('home.createEventPrompt') }}</p>
-      <NuxtLink to="/admin/events/new"
+      <NuxtLink to="/admin/events"
         class="inline-block mt-2 px-5 py-2.5 rounded-xl font-bold text-white text-sm"
         style="background: var(--color-primary)"
       >{{ $t('home.goToAdmin') }}</NuxtLink>
@@ -72,15 +86,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { formatMYR } from '~/utils/currency'
 
 const eventsStore = useEventsStore()
+const onboardingDismissed = ref(false)
 const membersStore = useMembersStore()
 const transactionsStore = useTransactionsStore()
 const settingsStore = useSettingsStore()
 
 const activeEvent = computed(() => eventsStore.activeEvent)
+const noEvents = computed(() => eventsStore.events.length === 0)
 const members = computed(() => membersStore.sortedMembers)
 
 const eventTotalFormatted = computed(() => {

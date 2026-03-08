@@ -143,6 +143,14 @@
     "all": "Semua",
     "confirmDelete": "Adakah anda pasti untuk memadam?"
   },
+  "onboarding": {
+    "title": "Acara Raya Baru",
+    "subtitle": "Tetapkan acara baru untuk mula",
+    "skipAll": "Langkau buat masa ini",
+    "skipMembers": "Langkau",
+    "finish": "Selesai!",
+    "step2Desc": "Anda boleh tambah ahli kemudian di Tetapan"
+  },
   "theme": {
     "hijauRaya": "Hijau Raya",
     "biruLangit": "Biru Langit",
