@@ -23,8 +23,8 @@ export function useWallet(memberId: Ref<string> | string) {
 
   function addMoney(payload: {
     amount: number
-    denomination: string
-    fromName: string
+    denominations: Record<string, number>
+    fromName?: string
     note?: string
   }) {
     if (!activeEventId.value) return null
@@ -32,8 +32,8 @@ export function useWallet(memberId: Ref<string> | string) {
       eventId: activeEventId.value,
       memberId: memberIdValue.value,
       amount: payload.amount,
-      denomination: payload.denomination,
-      fromName: payload.fromName,
+      denominations: payload.denominations,
+      fromName: payload.fromName ?? '',
       note: payload.note ?? '',
     })
   }

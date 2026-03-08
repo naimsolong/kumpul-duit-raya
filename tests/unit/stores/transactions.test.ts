@@ -12,7 +12,7 @@ function makeTx(overrides: Partial<Parameters<ReturnType<typeof useTransactionsS
     eventId: EVENT_A,
     memberId: MEMBER_1,
     amount: 1000,
-    denomination: 'RM10',
+    denominations: { 'RM10': 1 },
     fromName: 'Pak Long',
     note: '',
     ...overrides,
