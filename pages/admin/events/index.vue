@@ -50,12 +50,13 @@
 <script setup lang="ts">
 const eventsStore = useEventsStore()
 const settingsStore = useSettingsStore()
+const { t } = useI18n()
 const events = computed(() => eventsStore.sortedEvents)
 
 function setActive(id: string) { eventsStore.setActive(id) }
 
 function deleteEvent(id: string) {
-  if (confirm(useI18n().t('admin.confirmDelete'))) {
+  if (confirm(t('admin.confirmDelete'))) {
     eventsStore.deleteEvent(id)
   }
 }

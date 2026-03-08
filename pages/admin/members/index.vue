@@ -34,10 +34,11 @@
 
 <script setup lang="ts">
 const membersStore = useMembersStore()
+const { t } = useI18n()
 const members = computed(() => membersStore.sortedMembers)
 
 function deleteMember(id: string) {
-  if (confirm(useI18n().t('admin.confirmDelete'))) {
+  if (confirm(t('admin.confirmDelete'))) {
     membersStore.deleteMember(id)
   }
 }
