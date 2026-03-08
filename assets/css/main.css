@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Default theme: Hijau Raya (Classic Green) — overridden per event */
+    --color-primary: #16a34a;
+    --color-secondary: #ca8a04;
+    --color-accent: #dc2626;
+    --color-bg: #f0fdf4;
+    --color-text: #14532d;
+    --color-primary-light: #bbf7d0;
+    --color-secondary-light: #fef9c3;
+    --radius: 0.75rem;
+  }
+
+  * {
+    border-color: theme('colors.border');
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    min-height: 100dvh;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+}
+
+@layer utilities {
+  .theme-gradient {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  }
+
+  .theme-gradient-soft {
+    background: linear-gradient(135deg, var(--color-bg), var(--color-primary-light));
+  }
+
+  .theme-border {
+    border-color: var(--color-primary);
+  }
+
+  .theme-ring {
+    ring-color: var(--color-primary);
+  }
+
+  .theme-text-primary {
+    color: var(--color-primary);
+  }
+
+  .theme-text-secondary {
+    color: var(--color-secondary);
+  }
+
+  .theme-bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .theme-bg-soft {
+    background-color: var(--color-bg);
+  }
+
+  /* Money note shimmer effect */
+  .note-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  /* Touch target minimum size for mobile */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
