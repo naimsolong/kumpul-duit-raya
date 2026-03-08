@@ -143,6 +143,14 @@
     "all": "All",
     "confirmDelete": "Are you sure you want to delete?"
   },
+  "onboarding": {
+    "title": "New Raya Event",
+    "subtitle": "Set up a new event to get started",
+    "skipAll": "Skip for now",
+    "skipMembers": "Skip",
+    "finish": "Done!",
+    "step2Desc": "You can add members later from Settings"
+  },
   "theme": {
     "hijauRaya": "Hijau Raya",
     "biruLangit": "Biru Langit",
