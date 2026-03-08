@@ -8,28 +8,35 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^9.4.0",
     "@pinia/nuxt": "^0.10.1",
     "@vueuse/motion": "^2.2.6",
     "@vueuse/nuxt": "^12.7.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "lucide-vue-next": "^0.479.0",
     "nanoid": "^5.0.9",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
     "radix-vue": "^1.9.17",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@nuxt/kit": "^3.16.0",
     "@nuxtjs/tailwindcss": "^6.13.2",
+    "@pinia/testing": "^1.0.3",
+    "@vitest/coverage-v8": "^4.0.18",
+    "jsdom": "^28.1.0",
     "nuxt": "^3.16.0",
     "typescript": "^5.7.3",
+    "vitest": "^4.0.18",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   }

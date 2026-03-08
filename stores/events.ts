@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import type { RayaEvent } from './types'
 import { generateId } from '~/utils/id'
 import { THEME_PRESETS } from '~/utils/theme'
+import { useSettingsStore } from './settings'
 
 export const useEventsStore = defineStore('events', {
   state: () => ({
