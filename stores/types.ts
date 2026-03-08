@@ -27,8 +27,8 @@ export interface Transaction {
   id: string
   eventId: string
   memberId: string
-  amount: number      // in sen
-  denomination: string
+  amount: number                       // total in sen
+  denominations: Record<string, number> // label → quantity e.g. { 'RM10': 2, 'RM1': 3 }
   fromName: string
   note: string
   timestamp: string

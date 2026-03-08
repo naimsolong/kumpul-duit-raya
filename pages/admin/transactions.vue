@@ -21,19 +21,27 @@
 
     <div v-if="filtered.length > 0" class="space-y-2">
       <div v-for="tx in filtered" :key="tx.id"
-        class="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex items-center gap-3"
+        class="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm"
       >
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white text-xs font-black flex-shrink-0"
-          :style="getDenomStyle(tx.denomination)"
-        >{{ tx.denomination }}</div>
-        <div class="flex-1 min-w-0 space-y-0.5">
-          <p class="font-bold text-sm text-gray-800">{{ formatMYR(tx.amount) }}</p>
-          <p class="text-xs text-gray-500 truncate">
-            {{ getMemberName(tx.memberId) }} · {{ $t('wallet.from') }} {{ tx.fromName || '—' }}
-          </p>
-          <p class="text-xs text-gray-400">{{ getEventName(tx.eventId) }} · {{ formatDate(tx.timestamp) }}</p>
+        <div class="flex items-start gap-3">
+          <div class="flex-1 min-w-0 space-y-1">
+            <!-- Denomination chips -->
+            <div class="flex flex-wrap gap-1">
+              <span
+                v-for="(qty, label) in tx.denominations"
+                :key="label"
+                class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-white text-xs font-bold"
+                :style="getDenomStyle(label as string)"
+              >{{ label }} ×{{ qty }}</span>
+            </div>
+            <p class="font-bold text-sm text-gray-800">{{ formatMYR(tx.amount) }}</p>
+            <p class="text-xs text-gray-500 truncate">
+              {{ getMemberName(tx.memberId) }} · {{ $t('wallet.from') }} {{ tx.fromName || '—' }}
+            </p>
+            <p class="text-xs text-gray-400">{{ getEventName(tx.eventId) }} · {{ formatDate(tx.timestamp) }}</p>
+          </div>
+          <button class="text-xs text-red-300 hover:text-red-500 transition-colors p-1 flex-shrink-0" @click="deleteTransaction(tx.id)">✕</button>
         </div>
-        <button class="text-xs text-red-300 hover:text-red-500 transition-colors p-1" @click="deleteTransaction(tx.id)">✕</button>
       </div>
     </div>
 
@@ -43,8 +51,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { formatMYR } from '~/utils/currency'
-import { COINS, NOTES } from '~/utils/currency'
+import { formatMYR, ALL_DENOMINATIONS } from '~/utils/currency'
 
 const transactionsStore = useTransactionsStore()
 const eventsStore = useEventsStore()
@@ -73,8 +80,7 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
 }
 function getDenomStyle(label: string) {
-  const all = [...COINS, ...NOTES]
-  const found = all.find(d => d.label === label)
+  const found = ALL_DENOMINATIONS.find(d => d.label === label)
   return { background: found?.bgGradient ?? 'var(--color-primary)' }
 }
 function deleteTransaction(id: string) {

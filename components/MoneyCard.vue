@@ -9,6 +9,13 @@
     <!-- Shimmer overlay -->
     <div class="absolute inset-0 note-shimmer opacity-30 rounded-[inherit]" />
 
+    <!-- Count badge -->
+    <span
+      v-if="count && count > 0"
+      class="absolute -top-1.5 -right-1.5 z-20 bg-white rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center text-[10px] font-black shadow-md leading-none"
+      :style="{ color: denomination.color }"
+    >×{{ count }}</span>
+
     <!-- Coin layout -->
     <template v-if="denomination.type === 'coin'">
       <div class="relative z-10 flex flex-col items-center justify-center p-3" :style="coinSize">
@@ -41,7 +48,7 @@
 import { ref, computed } from 'vue'
 import type { Denomination } from '~/utils/currency'
 
-const props = defineProps<{ denomination: Denomination }>()
+const props = defineProps<{ denomination: Denomination; count?: number }>()
 const emit = defineEmits<{ slide: [denomination: Denomination] }>()
 
 const isSliding = ref(false)

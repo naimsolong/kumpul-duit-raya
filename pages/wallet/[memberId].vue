@@ -18,7 +18,7 @@
         <p class="text-white/50 text-xs mt-1">{{ transactions.length }} {{ $t('wallet.totalTransactions') }}</p>
       </div>
 
-      <!-- From input -->
+      <!-- Giver + Note inputs -->
       <div class="bg-white rounded-2xl p-4 space-y-3 border border-gray-100 shadow-sm">
         <div>
           <label class="block text-xs font-bold text-gray-500 mb-1 uppercase tracking-wide">{{ $t('wallet.fromLabel') }}</label>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <!-- Slide zone -->
+      <!-- Denomination picker -->
       <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
         <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-3 text-center">{{ $t('wallet.slideInstruction') }}</p>
 
@@ -56,7 +56,13 @@
         <!-- Coins -->
         <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">{{ $t('wallet.coins') }}</p>
         <div class="flex gap-2 mb-4">
-          <MoneyCard v-for="coin in COINS" :key="coin.label" :denomination="coin" @slide="onSlide" />
+          <MoneyCard
+            v-for="coin in COINS"
+            :key="coin.label"
+            :denomination="coin"
+            :count="basket[coin.label] ?? 0"
+            @slide="onSlide"
+          />
         </div>
 
         <!-- Notes -->
@@ -66,10 +72,58 @@
             v-for="note in NOTES"
             :key="note.label"
             :denomination="note"
+            :count="basket[note.label] ?? 0"
             @slide="onSlide"
             class="h-16"
           />
         </div>
+
+        <!-- Basket summary -->
+        <template v-if="basketHasItems">
+          <div class="mt-4 pt-4 border-t border-gray-100">
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">{{ $t('wallet.basket') }}</p>
+            <div class="space-y-2">
+              <div
+                v-for="item in basketItems"
+                :key="item.label"
+                class="flex items-center gap-2"
+              >
+                <div
+                  class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-black flex-shrink-0"
+                  :style="getDenomStyle(item.label)"
+                >{{ item.shortLabel }}</div>
+                <span class="text-sm text-gray-500 flex-1">× {{ item.count }}</span>
+                <span class="text-sm font-bold text-gray-800 mr-2">{{ formatMYR(item.subtotal) }}</span>
+                <button
+                  class="w-6 h-6 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center hover:bg-gray-200 transition-colors text-base leading-none"
+                  @click="decrement(item.label)"
+                >−</button>
+                <button
+                  class="w-6 h-6 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center hover:bg-gray-200 transition-colors text-base leading-none"
+                  @click="increment(item.label)"
+                >+</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
+              <div>
+                <p class="text-xs text-gray-400 uppercase tracking-wide">{{ $t('common.total') }}</p>
+                <p class="text-2xl font-black" style="color: var(--color-primary)">{{ formatMYR(basketTotal) }}</p>
+              </div>
+              <div class="flex gap-2">
+                <button
+                  class="px-3 py-2 rounded-xl text-xs font-bold text-gray-400 border border-gray-200 hover:bg-gray-50 transition-colors"
+                  @click="clearBasket"
+                >{{ $t('wallet.clear') }}</button>
+                <button
+                  class="px-5 py-2 rounded-xl text-sm font-black text-white transition-colors shadow-md"
+                  style="background: linear-gradient(135deg, var(--color-primary), var(--color-secondary))"
+                  @click="saveTransaction"
+                >{{ $t('wallet.saveTransaction') }}</button>
+              </div>
+            </div>
+          </div>
+        </template>
       </div>
 
       <!-- Transaction history -->
@@ -78,23 +132,29 @@
         <div
           v-for="tx in transactions"
           :key="tx.id"
-          class="bg-white rounded-2xl p-3 flex items-center gap-3 border border-gray-100 shadow-sm"
+          class="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm"
         >
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center text-white text-xs font-black flex-shrink-0"
-            :style="getDenomStyle(tx.denomination)"
-          >
-            {{ tx.denomination }}
-          </div>
-          <div class="flex-1 min-w-0">
-            <p class="font-bold text-sm text-gray-800">{{ formatMYR(tx.amount) }}</p>
-            <p class="text-xs text-gray-400 truncate">
-              {{ $t('wallet.from') }} {{ tx.fromName || '—' }}
-              <span v-if="tx.note"> · {{ tx.note }}</span>
-            </p>
-          </div>
-          <div class="flex flex-col items-end gap-1">
-            <p class="text-xs text-gray-400">{{ formatDate(tx.timestamp) }}</p>
-            <button class="text-xs text-red-300 hover:text-red-500 transition-colors" @click="deleteTransaction(tx.id)">✕</button>
+          <div class="flex items-start gap-3">
+            <div class="flex-1 min-w-0">
+              <!-- Denomination chips -->
+              <div class="flex flex-wrap gap-1 mb-1.5">
+                <span
+                  v-for="(qty, label) in tx.denominations"
+                  :key="label"
+                  class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-white text-xs font-bold"
+                  :style="getDenomStyle(label as string)"
+                >{{ label }} ×{{ qty }}</span>
+              </div>
+              <p class="font-bold text-sm text-gray-800">{{ formatMYR(tx.amount) }}</p>
+              <p class="text-xs text-gray-400 truncate">
+                {{ $t('wallet.from') }} {{ tx.fromName || '—' }}
+                <span v-if="tx.note"> · {{ tx.note }}</span>
+              </p>
+            </div>
+            <div class="flex flex-col items-end gap-1 flex-shrink-0">
+              <p class="text-xs text-gray-400">{{ formatDate(tx.timestamp) }}</p>
+              <button class="text-xs text-red-300 hover:text-red-500 transition-colors" @click="deleteTransaction(tx.id)">✕</button>
+            </div>
           </div>
         </div>
       </div>
@@ -107,7 +167,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { COINS, NOTES, formatMYR } from '~/utils/currency'
+import { COINS, NOTES, ALL_DENOMINATIONS, formatMYR } from '~/utils/currency'
 
 const route = useRoute()
 const memberId = computed(() => route.params.memberId as string)
@@ -118,11 +178,58 @@ const transactionsStore = useTransactionsStore()
 
 const fromName = ref('')
 const noteText = ref('')
+const basket = ref<Record<string, number>>({})
+
+const basketItems = computed(() =>
+  ALL_DENOMINATIONS
+    .filter(d => (basket.value[d.label] ?? 0) > 0)
+    .map(d => ({
+      label: d.label,
+      shortLabel: d.type === 'coin' ? d.label.replace(' sen', '') : d.label,
+      count: basket.value[d.label],
+      subtotal: basket.value[d.label] * d.value,
+    }))
+)
+
+const basketHasItems = computed(() => basketItems.value.length > 0)
+
+const basketTotal = computed(() =>
+  basketItems.value.reduce((sum, item) => sum + item.subtotal, 0)
+)
 
 function onSlide(denomination: (typeof COINS)[number] | (typeof NOTES)[number]) {
   if (!member.value) return
-  addMoney({ amount: denomination.value, denomination: denomination.label, fromName: fromName.value || '—', note: noteText.value })
-  walletSlotRef.value?.trigger(denomination.value)
+  basket.value[denomination.label] = (basket.value[denomination.label] ?? 0) + 1
+}
+
+function increment(label: string) {
+  basket.value[label] = (basket.value[label] ?? 0) + 1
+}
+
+function decrement(label: string) {
+  if ((basket.value[label] ?? 0) <= 1) {
+    const updated = { ...basket.value }
+    delete updated[label]
+    basket.value = updated
+  } else {
+    basket.value[label]--
+  }
+}
+
+function clearBasket() {
+  basket.value = {}
+}
+
+function saveTransaction() {
+  if (!member.value || !basketHasItems.value) return
+  addMoney({
+    amount: basketTotal.value,
+    denominations: { ...basket.value },
+    fromName: fromName.value,
+    note: noteText.value,
+  })
+  walletSlotRef.value?.trigger(basketTotal.value)
+  clearBasket()
 }
 
 function deleteTransaction(id: string) {
@@ -134,8 +241,7 @@ function formatDate(iso: string) {
 }
 
 function getDenomStyle(label: string) {
-  const all = [...COINS, ...NOTES]
-  const found = all.find(d => d.label === label)
+  const found = ALL_DENOMINATIONS.find(d => d.label === label)
   return { background: found?.bgGradient ?? 'var(--color-primary)' }
 }
 </script>
