@@ -30,7 +30,7 @@ export default defineNuxtConfig({
       { code: 'en', file: 'en.json', name: 'English' },
       { code: 'ms', file: 'ms.json', name: 'Bahasa Melayu' },
     ],
-    defaultLocale: 'ms',
+    defaultLocale: 'en',
     langDir: 'locales',
     strategy: 'no_prefix',
     bundle: {

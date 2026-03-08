@@ -155,7 +155,7 @@ const membersStore = useMembersStore()
 const settingsStore = useSettingsStore()
 
 const step = ref(1)
-const selectedLang = ref<'en' | 'ms'>('ms')
+const selectedLang = ref<'en' | 'ms'>('en')
 const eventName = ref(`Raya ${new Date().getFullYear()}`)
 const eventEmoji = ref('🌙')
 const selectedPreset = ref('hijau-raya')

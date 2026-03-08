@@ -5,7 +5,7 @@ export const useSettingsStore = defineStore('settings', {
   state: (): AppSettings => ({
     activeEventId: null,
     setupComplete: false,
-    language: 'ms',
+    language: 'en',
   }),
 
   getters: {
@@ -30,7 +30,7 @@ export const useSettingsStore = defineStore('settings', {
     resetAll() {
       this.activeEventId = null
       this.setupComplete = false
-      this.language = 'ms'
+      this.language = 'en'
     },
   },
 
