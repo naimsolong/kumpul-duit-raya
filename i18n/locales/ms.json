@@ -94,7 +94,9 @@
     "added": "ditambah",
     "from": "dari",
     "deleteConfirm": "Padam transaksi ini?",
-    "totalTransactions": "jumlah transaksi"
+    "totalTransactions": "jumlah transaksi",
+    "editTransaction": "Edit Transaksi",
+    "saveChanges": "Simpan Perubahan"
   },
   "leaderboard": {
     "title": "Papan Kedudukan",

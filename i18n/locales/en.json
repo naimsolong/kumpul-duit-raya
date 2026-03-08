@@ -94,7 +94,9 @@
     "added": "added",
     "from": "from",
     "deleteConfirm": "Delete this transaction?",
-    "totalTransactions": "total transactions"
+    "totalTransactions": "total transactions",
+    "editTransaction": "Edit Transaction",
+    "saveChanges": "Save Changes"
   },
   "leaderboard": {
     "title": "Leaderboard",

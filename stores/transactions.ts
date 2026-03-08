@@ -47,6 +47,12 @@ export const useTransactionsStore = defineStore('transactions', {
       this.transactions = this.transactions.filter(t => t.id !== id)
     },
 
+    updateTransaction(id: string, payload: Pick<Transaction, 'denominations' | 'amount' | 'fromName' | 'note'>) {
+      const idx = this.transactions.findIndex(t => t.id === id)
+      if (idx === -1) return
+      this.transactions[idx] = { ...this.transactions[idx], ...payload }
+    },
+
     deleteAllForEvent(eventId: string) {
       this.transactions = this.transactions.filter(t => t.eventId !== eventId)
     },
