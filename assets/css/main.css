@@ -15,10 +15,6 @@
     --radius: 0.75rem;
   }
 
-  * {
-    border-color: theme('colors.border');
-  }
-
   body {
     background-color: var(--color-bg);
     color: var(--color-text);
