@@ -139,13 +139,17 @@
 
     <!-- Actions -->
     <div class="flex gap-3">
-      <!-- Skip -->
+      <!-- Step 1: Skip all | Step 2: Back -->
       <button
+        v-if="step === 1"
         class="flex-1 py-3 rounded-xl border-2 border-gray-200 font-bold text-gray-500 text-sm"
         @click="onSkip"
-      >
-        {{ step === 1 ? $t('onboarding.skipAll') : $t('onboarding.skipMembers') }}
-      </button>
+      >{{ $t('onboarding.skipAll') }}</button>
+      <button
+        v-else
+        class="flex-1 py-3 rounded-xl border-2 border-gray-200 font-bold text-gray-500 text-sm"
+        @click="step = 1"
+      >{{ $t('common.back') }}</button>
 
       <!-- Next / Done -->
       <button
@@ -249,7 +253,7 @@ function onNext() {
 }
 
 function onSkip() {
-  // On step 2 the event is already created — just skip members
-  emit('dismiss')
+  // Only callable from step 1 — dismiss without creating anything
+  if (step.value === 1) emit('dismiss')
 }
 </script>
