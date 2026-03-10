@@ -162,5 +162,24 @@
     "merahMerdeka": "Merah Merdeka",
     "unguMewah": "Ungu Mewah",
     "custom": "Custom"
+  },
+  "export": {
+    "title": "Export Report",
+    "downloadPdf": "Download PDF",
+    "generating": "Generating...",
+    "generatedOn": "Generated on",
+    "leaderboard": "Leaderboard",
+    "transactions": "Transactions",
+    "sortBy": "Sort by",
+    "sortDate": "Date",
+    "sortAmount": "Amount",
+    "sortGiver": "Giver",
+    "noTransactions": "No transactions",
+    "denominations": "Denominations",
+    "share": "Share",
+    "members": "members",
+    "totalTransactions": "transactions",
+    "noEvent": "No active event to export",
+    "rank": "Rank"
   }
 }

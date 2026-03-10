@@ -19,9 +19,14 @@
           <p class="text-white/70 text-xs">{{ $t('home.totalCollected') }}</p>
           <p class="text-3xl font-black">{{ eventTotalFormatted }}</p>
         </div>
-        <NuxtLink to="/leaderboard"
-          class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-xl text-sm font-bold transition-colors"
-        >🏆 {{ $t('nav.leaderboard') }}</NuxtLink>
+        <div class="flex gap-2">
+          <NuxtLink to="/leaderboard"
+            class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-xl text-sm font-bold transition-colors"
+          >🏆 {{ $t('nav.leaderboard') }}</NuxtLink>
+          <NuxtLink to="/export"
+            class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-xl text-sm font-bold transition-colors"
+          >📄 {{ $t('export.title') }}</NuxtLink>
+        </div>
       </div>
     </div>
 

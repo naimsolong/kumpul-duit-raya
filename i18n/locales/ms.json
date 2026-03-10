@@ -162,5 +162,24 @@
     "merahMerdeka": "Merah Merdeka",
     "unguMewah": "Ungu Mewah",
     "custom": "Pilihan Sendiri"
+  },
+  "export": {
+    "title": "Eksport Laporan",
+    "downloadPdf": "Muat Turun PDF",
+    "generating": "Menjana...",
+    "generatedOn": "Dijana pada",
+    "leaderboard": "Papan Kedudukan",
+    "transactions": "Transaksi",
+    "sortBy": "Susun mengikut",
+    "sortDate": "Tarikh",
+    "sortAmount": "Jumlah",
+    "sortGiver": "Pemberi",
+    "noTransactions": "Tiada transaksi",
+    "denominations": "Denominasi",
+    "share": "Bahagian",
+    "members": "ahli",
+    "totalTransactions": "transaksi",
+    "noEvent": "Tiada acara aktif untuk dieksport",
+    "rank": "Kedudukan"
   }
 }
