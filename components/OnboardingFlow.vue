@@ -72,7 +72,7 @@
     <!-- Step 2: Add Members -->
     <div v-if="step === 2" class="space-y-3">
       <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-        <h3 class="font-bold text-gray-700 mb-3">{{ $t('setup.step3Title') }}</h3>
+        <h3 class="font-bold text-gray-700 mb-1">{{ $t('setup.step3Title') }}</h3>
         <p class="text-xs text-gray-400">{{ $t('onboarding.step2Desc') }}</p>
       </div>
 
@@ -139,11 +139,11 @@
 
     <!-- Actions -->
     <div class="flex gap-3">
-      <!-- Step 1: Skip all | Step 2: Back -->
+      <!-- Step 1: Skip all | Step 2: Back (no skip allowed) -->
       <button
         v-if="step === 1"
         class="flex-1 py-3 rounded-xl border-2 border-gray-200 font-bold text-gray-500 text-sm"
-        @click="onSkip"
+        @click="emit('dismiss')"
       >{{ $t('onboarding.skipAll') }}</button>
       <button
         v-else
@@ -198,7 +198,8 @@ const roles = computed(() => [
 
 const canProceed = computed(() => {
   if (step.value === 1) return eventName.value.trim().length > 0
-  return newMembers.value.every(m => m.name.trim().length > 0)
+  // At least one member with a name is required
+  return newMembers.value.length > 0 && newMembers.value.every(m => m.name.trim().length > 0)
 })
 
 function selectPreset(preset: ThemePreset) {
@@ -216,44 +217,35 @@ function addMember() {
   })
 }
 
-function createEvent() {
-  const event = eventsStore.createEvent({
-    name: eventName.value.trim(),
-    year,
-    startDate: `${year}-03-01`,
-    endDate: `${year}-04-30`,
-    theme: selectedTheme.value,
-    emoji: eventEmoji.value,
-  })
-  eventsStore.setActive(event.id)
-}
-
-function createMembers() {
-  newMembers.value.forEach((m, i) => {
-    if (m.name.trim()) {
-      membersStore.createMember({
-        name: m.name.trim(),
-        role: m.role,
-        avatar: m.avatar,
-        color: memberColors[i % memberColors.length],
-      })
-    }
-  })
-}
-
 function onNext() {
   if (!canProceed.value) return
   if (step.value === 1) {
-    createEvent()
+    // Move to member step — event is NOT created yet
     step.value = 2
   } else {
-    createMembers()
+    // Create event + members together only when Done is confirmed
+    const event = eventsStore.createEvent({
+      name: eventName.value.trim(),
+      year,
+      startDate: `${year}-03-01`,
+      endDate: `${year}-04-30`,
+      theme: selectedTheme.value,
+      emoji: eventEmoji.value,
+    })
+    eventsStore.setActive(event.id)
+
+    newMembers.value.forEach((m, i) => {
+      if (m.name.trim()) {
+        membersStore.createMember({
+          name: m.name.trim(),
+          role: m.role,
+          avatar: m.avatar,
+          color: memberColors[i % memberColors.length],
+        })
+      }
+    })
+
     emit('dismiss')
   }
-}
-
-function onSkip() {
-  // Only callable from step 1 — dismiss without creating anything
-  if (step.value === 1) emit('dismiss')
 }
 </script>
